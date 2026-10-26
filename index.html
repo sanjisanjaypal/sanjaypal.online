@@ -817,12 +817,6 @@ a.btn:hover svg,.more-btn[aria-expanded="false"]:hover svg{animation:nudgeDown 1
     <p class="loader-title" id="loaderTitle">Sanjay Pal · UX Designer</p>
     <div class="loader-bar" role="progressbar" aria-label="Loading the site" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div>
     <p class="loader-pct" aria-hidden="true">0%</p>
-    <div class="loader-enter" id="loaderEnter" hidden>
-      <button type="button" class="btn btn-primary" id="enterSound">Enter with sound
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H3v6h3l5 4z" fill="currentColor" stroke="none"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
-      <button type="button" class="loader-quiet" id="enterQuiet">Enter without sound</button>
-      <p class="loader-note">Music plays softly. Mute it anytime with the speaker icon.</p>
-    </div>
   </div>
 </div>
 <script>
@@ -868,14 +862,10 @@ a.btn:hover svg,.more-btn[aria-expanded="false"]:hover svg{animation:nudgeDown 1
   setTimeout(()=>{target=100; loaded=true},9000);   // never hold visitors longer than this
 
   function finish(){
-    const m=window.__music;
-    if(!m || m.isMuted() || m.isPlaying() || ss.get("sp-entered")==="1"){ dismiss(); return }
-    L.classList.add("ready");
-    const box=document.getElementById("loaderEnter"); box.hidden=false;
-    document.getElementById("enterSound").focus();
+    // Start the music as the home page appears (where the browser allows it), then open the site
+    if(window.__music && !window.__music.isMuted() && !window.__music.isPlaying()) window.__music.start();
+    dismiss();
   }
-  document.getElementById("enterSound").addEventListener("click",()=>{ window.__music&&window.__music.start(); ss.set("sp-entered","1"); dismiss() });
-  document.getElementById("enterQuiet").addEventListener("click",()=>{ window.__music&&window.__music.mute(); ss.set("sp-entered","1"); dismiss() });
 
   function dismiss(){
     if(gone) return; gone=true;
@@ -1172,7 +1162,6 @@ a.btn:hover svg,.more-btn[aria-expanded="false"]:hover svg{animation:nudgeDown 1
   <div class="wrap foot-logo-wrap"><svg class="foot-logo" aria-hidden="true" focusable="false"><use href="#sp-logo"/></svg></div>
   <div class="wrap">
     <span>© <span id="yr">2026</span> <span data-cms="tcfab1f7">Sanjay Pal</span></span>
-    <button type="button" class="admin-link" id="adminOpen">Editor login</button>
     <span id="themeNote" aria-live="polite"></span>
   </div>
 </footer>
@@ -1699,8 +1688,10 @@ window.__cmsReady=Promise.race([
     try{const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s)); return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}catch(e){return null}
   }
   function openLogin(){ $("cmsLoginError").textContent=""; try{login.showModal()}catch(e){login.setAttribute("open","")} $("cmsUser").focus() }
-  $("adminOpen").addEventListener("click",openLogin);
-  if(location.hash==="#admin") setTimeout(openLogin,300);
+  // Open the login only from the site link with #admin at the end
+  const wantsAdmin=()=>/^#admin$/i.test(location.hash);
+  if(wantsAdmin()) (window.__afterEnter||(f=>f()))(()=>setTimeout(openLogin,200));
+  addEventListener("hashchange",()=>{ if(wantsAdmin()) openLogin() });
   $("cmsLoginCancel").addEventListener("click",()=>login.close());
   $("cmsLoginForm").addEventListener("submit",async e=>{
     e.preventDefault();
@@ -1861,7 +1852,7 @@ window.__cmsReady=Promise.race([
   // Browsers only allow sound after the visitor interacts with the page
   const starterEvents=["pointerdown","pointerup","click","touchend","keydown"];
   function starter(e){
-    if(e.target.closest&&e.target.closest("#sound,#loader")) return;
+    if(e.target.closest&&e.target.closest("#sound")) return;
     if(e.type==="keydown"&&["Tab","Shift","Control","Alt","Meta"].includes(e.key)) return;
     play(true);
   }

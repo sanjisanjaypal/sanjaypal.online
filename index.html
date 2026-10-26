@@ -375,10 +375,10 @@ section#about{border-top:0; padding-left:max(16px, env(safe-area-inset-left,0px)
 .btn{transition:filter .2s, background .2s, border-color .2s, transform .2s}
 .btn:active{transform:scale(.97)}
 .btn svg,.socials svg{transition:transform .25s}
-.btn:hover svg{transform:translateY(3px)}
+
 .socials a{transition:border-color .2s, transform .2s}
 .socials a:hover{transform:translateY(-2px)}
-.socials a:hover svg{transform:translate(2px,-2px)}
+
 .case{transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s}
 .case:hover{transform:translateY(-5px); box-shadow:0 22px 44px -26px rgba(6,34,22,.5)}
 .case .art svg{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
@@ -487,7 +487,7 @@ section#about{border-top:0; padding-left:max(16px, env(safe-area-inset-left,0px)
 .hdr-tools{display:flex; align-items:center; gap:.5rem}
 .sound{display:flex; align-items:center; gap:.4rem}
 .vol{-webkit-appearance:none; appearance:none; width:84px; height:44px; background:transparent; cursor:pointer; margin:0; accent-color:var(--btn-bg)}
-.vol::-webkit-slider-runnable-track{height:4px; border-radius:4px; background:linear-gradient(90deg,var(--btn-bg) var(--fill,2%),var(--line-strong) var(--fill,2%))}
+.vol::-webkit-slider-runnable-track{height:4px; border-radius:4px; background:linear-gradient(90deg,var(--btn-bg) var(--fill,4%),var(--line-strong) var(--fill,4%))}
 .vol::-moz-range-track{height:4px; border-radius:4px; background:var(--line-strong)}
 .vol::-moz-range-progress{height:4px; border-radius:4px; background:var(--btn-bg)}
 .vol::-webkit-slider-thumb{-webkit-appearance:none; width:16px; height:16px; margin-top:-6px; border-radius:50%; background:var(--btn-bg); border:2px solid var(--bg)}
@@ -510,7 +510,7 @@ section#about{border-top:0; padding-left:max(16px, env(safe-area-inset-left,0px)
 /* ---------- Phone menu: dark green panel with separators ---------- */
 @media (max-width:920px){
   .nav{background:var(--forest); border-bottom:0; padding:0 0 .5rem; gap:0; box-shadow:0 22px 34px -20px rgba(0,0,0,.55)}
-  .nav a{color:var(--on-forest); border-radius:0; padding:1rem max(20px, env(safe-area-inset-left,0px)); border-bottom:1px solid rgba(249,249,239,.16); font-size:1.05rem}
+  .nav a{color:var(--on-forest); border-radius:0; padding:1rem max(20px, env(safe-area-inset-left,0px)); border-bottom:1px solid rgba(249,249,239,.16); font-size:1.05rem; text-align:center}
   .nav a:hover{background:rgba(221,243,170,.1); color:var(--lime)}
   .nav .nav-vol{color:var(--on-forest-muted); padding:1rem max(20px, env(safe-area-inset-left,0px)) .5rem}
   .nav .vol{--line-strong:rgba(249,249,239,.3); --btn-bg:var(--lime); --bg:var(--forest); accent-color:var(--lime)}
@@ -570,6 +570,245 @@ footer{padding-bottom:calc(16rem + env(safe-area-inset-bottom,0px)) !important}
 .seg button[aria-pressed="true"]{background:var(--ink); color:var(--surface)}
 .a11y-actions{display:flex; gap:.5rem; margin-top:1rem; flex-wrap:wrap}
 .a11y-actions button{flex:1; min-height:44px; border-radius:999px; border:1px solid var(--line); background:transparent; color:var(--ink); font:600 .92rem var(--body); cursor:pointer; padding:.4rem .8rem}
+
+/* ========== iOS-style liquid glass for buttons and icon buttons ========== */
+:root{
+  --glass-bg:rgba(255,255,255,.5);
+  --glass-sheen:linear-gradient(180deg,rgba(255,255,255,.7) 0%,rgba(255,255,255,.2) 46%,rgba(255,255,255,.06) 100%);
+  --glass-sheen-soft:linear-gradient(180deg,rgba(255,255,255,.3) 0%,rgba(255,255,255,.06) 50%,rgba(255,255,255,0) 100%);
+  --glass-ring:rgba(6,34,22,.12);
+  --glass-inset:inset 0 1px 0 rgba(255,255,255,.95), inset 0 -1px 1px rgba(255,255,255,.3), inset 0 0 0 1px rgba(255,255,255,.35);
+  --glass-shadow:0 10px 28px -12px rgba(6,34,22,.38), 0 2px 6px -2px rgba(6,34,22,.12);
+  --glass-shadow-hover:0 16px 34px -12px rgba(6,34,22,.45), 0 3px 8px -2px rgba(6,34,22,.14);
+  --glass-tint:linear-gradient(180deg,#05894C 0%,#027742 55%,#01663A 100%);
+  --glass-tint-fg:#FFFFFF;
+  --glass-blur:blur(18px) saturate(180%);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --glass-bg:rgba(255,255,255,.08);
+  --glass-sheen:linear-gradient(180deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,.06) 46%,rgba(255,255,255,.02) 100%);
+  --glass-ring:rgba(255,255,255,.16);
+  --glass-inset:inset 0 1px 0 rgba(255,255,255,.28), inset 0 -1px 1px rgba(255,255,255,.06);
+  --glass-shadow:0 12px 30px -12px rgba(0,0,0,.7), 0 2px 6px -2px rgba(0,0,0,.4);
+  --glass-shadow-hover:0 18px 36px -12px rgba(0,0,0,.8), 0 3px 8px -2px rgba(0,0,0,.45);
+  --glass-tint:linear-gradient(180deg,#EAF8C4 0%,#DDF3AA 55%,#C9E48C 100%);
+  --glass-tint-fg:#062216}}
+:root[data-theme="dark"]{
+  --glass-bg:rgba(255,255,255,.08);
+  --glass-sheen:linear-gradient(180deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,.06) 46%,rgba(255,255,255,.02) 100%);
+  --glass-ring:rgba(255,255,255,.16);
+  --glass-inset:inset 0 1px 0 rgba(255,255,255,.28), inset 0 -1px 1px rgba(255,255,255,.06);
+  --glass-shadow:0 12px 30px -12px rgba(0,0,0,.7), 0 2px 6px -2px rgba(0,0,0,.4);
+  --glass-shadow-hover:0 18px 36px -12px rgba(0,0,0,.8), 0 3px 8px -2px rgba(0,0,0,.45);
+  --glass-tint:linear-gradient(180deg,#EAF8C4 0%,#DDF3AA 55%,#C9E48C 100%);
+  --glass-tint-fg:#062216}
+/* Dark green bands and the loader always use the dark glass */
+.band,.loader{
+  --glass-bg:rgba(255,255,255,.08);
+  --glass-sheen:linear-gradient(180deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,.06) 46%,rgba(255,255,255,.02) 100%);
+  --glass-ring:rgba(255,255,255,.18);
+  --glass-inset:inset 0 1px 0 rgba(255,255,255,.3), inset 0 -1px 1px rgba(255,255,255,.06);
+  --glass-shadow:0 12px 30px -12px rgba(0,0,0,.6);
+  --glass-tint:linear-gradient(180deg,#EAF8C4 0%,#DDF3AA 55%,#C9E48C 100%);
+  --glass-tint-fg:#062216}
+
+.btn,.icon-btn,.more-btn,.socials a,.sound-dock,.a11y-fab{
+  border-radius:999px; border:1px solid var(--glass-ring); color:var(--ink);
+  background:var(--glass-sheen), var(--glass-bg);
+  -webkit-backdrop-filter:var(--glass-blur); backdrop-filter:var(--glass-blur);
+  box-shadow:var(--glass-inset), var(--glass-shadow);
+  transition:transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s, filter .2s, background .25s}
+.btn,.more-btn,.socials a{padding-inline:1.35rem}
+.btn:hover,.icon-btn:hover,.more-btn:hover,.socials a:hover,.a11y-fab:hover{transform:translateY(-1px); box-shadow:var(--glass-inset), var(--glass-shadow-hover); border-color:var(--glass-ring); filter:brightness(1.04)}
+.btn:active,.icon-btn:active,.more-btn:active,.socials a:active,.a11y-fab:active,.sound-btn:active{transform:scale(.96)}
+.btn-primary,.a11y-fab,.loader-enter .btn.btn-primary{
+  background:var(--glass-sheen-soft), var(--glass-tint); color:var(--glass-tint-fg);
+  border-color:rgba(255,255,255,.28)}
+.a11y-fab{width:56px; height:56px}
+.sound-dock{border-radius:999px}
+.sound-btn{border-radius:50%}
+.sound-btn:hover{background:rgba(255,255,255,.35)}
+.band .sound-btn:hover,:root[data-theme="dark"] .sound-btn:hover{background:rgba(255,255,255,.12)}
+.hdr-cta{padding-inline:1.2rem}
+
+/* Solid fallbacks: no blur support, reduced transparency, or the high-contrast switch */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  :root{--glass-bg:rgba(255,255,255,.9)} .band,.loader{--glass-bg:rgba(255,255,255,.14)}}
+@media (prefers-reduced-transparency: reduce){
+  .btn,.icon-btn,.more-btn,.socials a,.sound-dock,.a11y-fab{-webkit-backdrop-filter:none; backdrop-filter:none; background:var(--surface)}
+  .btn-primary,.a11y-fab{background:var(--btn-bg); color:var(--btn-fg)}}
+:root.a11y-contrast .btn,:root.a11y-contrast .icon-btn,:root.a11y-contrast .more-btn,:root.a11y-contrast .socials a,:root.a11y-contrast .sound-dock{background:var(--surface); border-color:var(--ink); -webkit-backdrop-filter:none; backdrop-filter:none}
+:root.a11y-contrast .btn-primary,:root.a11y-contrast .a11y-fab{background:var(--btn-bg); color:var(--btn-fg)}
+
+/* ========== Pistachio glass tone for every button and icon button ========== */
+:root{
+  --glass-bg:rgba(221,243,170,.4);
+  --glass-sheen:linear-gradient(180deg,rgba(255,255,255,.78) 0%,rgba(255,255,255,.24) 44%,rgba(221,243,170,.12) 100%);
+  --glass-sheen-soft:linear-gradient(180deg,rgba(255,255,255,.62) 0%,rgba(255,255,255,.14) 46%,rgba(255,255,255,0) 100%);
+  --glass-ring:rgba(122,165,55,.38);
+  --glass-inset:inset 0 1px 0 rgba(255,255,255,.95), inset 0 -1px 1px rgba(255,255,255,.4), inset 0 0 0 1px rgba(255,255,255,.35), inset 0 -10px 18px -12px rgba(132,186,52,.45);
+  --glass-shadow:0 10px 28px -12px rgba(70,110,20,.4), 0 2px 6px -2px rgba(6,34,22,.1);
+  --glass-shadow-hover:0 16px 34px -12px rgba(70,110,20,.48), 0 3px 8px -2px rgba(6,34,22,.12);
+  --glass-tint:linear-gradient(180deg,rgba(221,243,170,.92) 0%,rgba(196,230,118,.8) 55%,rgba(176,218,92,.84) 100%);
+  --glass-tint-fg:#062216;
+  --glass-blur:blur(20px) saturate(190%);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --glass-bg:rgba(221,243,170,.1);
+  --glass-sheen:linear-gradient(180deg,rgba(255,255,255,.2) 0%,rgba(255,255,255,.05) 46%,rgba(221,243,170,.04) 100%);
+  --glass-sheen-soft:linear-gradient(180deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,.04) 50%,rgba(255,255,255,0) 100%);
+  --glass-ring:rgba(221,243,170,.3);
+  --glass-inset:inset 0 1px 0 rgba(255,255,255,.3), inset 0 -10px 18px -12px rgba(221,243,170,.3);
+  --glass-tint:linear-gradient(180deg,rgba(221,243,170,.42) 0%,rgba(196,230,118,.28) 55%,rgba(176,218,92,.32) 100%);
+  --glass-tint-fg:#F1FADB}}
+:root[data-theme="dark"],.band,.loader{
+  --glass-bg:rgba(221,243,170,.1);
+  --glass-sheen:linear-gradient(180deg,rgba(255,255,255,.2) 0%,rgba(255,255,255,.05) 46%,rgba(221,243,170,.04) 100%);
+  --glass-sheen-soft:linear-gradient(180deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,.04) 50%,rgba(255,255,255,0) 100%);
+  --glass-ring:rgba(221,243,170,.3);
+  --glass-inset:inset 0 1px 0 rgba(255,255,255,.3), inset 0 -10px 18px -12px rgba(221,243,170,.3);
+  --glass-shadow:0 12px 30px -12px rgba(0,0,0,.65), 0 2px 6px -2px rgba(0,0,0,.35);
+  --glass-shadow-hover:0 18px 36px -12px rgba(0,0,0,.75), 0 3px 8px -2px rgba(0,0,0,.4);
+  --glass-tint:linear-gradient(180deg,rgba(221,243,170,.42) 0%,rgba(196,230,118,.28) 55%,rgba(176,218,92,.32) 100%);
+  --glass-tint-fg:#F1FADB}
+.btn:hover,.icon-btn:hover,.more-btn:hover,.socials a:hover,.a11y-fab:hover{filter:brightness(1.04) saturate(1.12)}
+.sound-btn:hover{background:rgba(255,255,255,.4)}
+.btn-primary svg,.a11y-fab svg{color:currentColor}
+/* Badge in the hero gets the same glass */
+.eyebrow{background:var(--glass-sheen), var(--glass-bg); border:1px solid var(--glass-ring); border-radius:999px; box-shadow:var(--glass-inset), var(--glass-shadow); -webkit-backdrop-filter:var(--glass-blur); backdrop-filter:var(--glass-blur)}
+
+/* ========== Clear glass at rest, pistachio glass on hover / press ========== */
+:root{
+  --glass-rest:rgba(255,255,255,.12);
+  --glass-rest-sheen:linear-gradient(180deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,.08) 45%,rgba(255,255,255,0) 100%);
+  --glass-float:rgba(255,255,255,.42);
+  --glass-hover:rgba(221,243,170,.62);
+  --glass-hover-strong:linear-gradient(180deg,rgba(221,243,170,.95) 0%,rgba(196,230,118,.85) 55%,rgba(176,218,92,.88) 100%);
+  --glass-hover-fg:#062216;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --glass-rest:rgba(255,255,255,.04);
+  --glass-rest-sheen:linear-gradient(180deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,.03) 45%,rgba(255,255,255,0) 100%);
+  --glass-float:rgba(255,255,255,.1);
+  --glass-hover:rgba(221,243,170,.22);
+  --glass-hover-strong:linear-gradient(180deg,rgba(221,243,170,.4) 0%,rgba(196,230,118,.28) 55%,rgba(176,218,92,.32) 100%);
+  --glass-hover-fg:#F1FADB}}
+:root[data-theme="dark"],.band,.loader{
+  --glass-rest:rgba(255,255,255,.04);
+  --glass-rest-sheen:linear-gradient(180deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,.03) 45%,rgba(255,255,255,0) 100%);
+  --glass-float:rgba(255,255,255,.1);
+  --glass-hover:rgba(221,243,170,.22);
+  --glass-hover-strong:linear-gradient(180deg,rgba(221,243,170,.4) 0%,rgba(196,230,118,.28) 55%,rgba(176,218,92,.32) 100%);
+  --glass-hover-fg:#F1FADB}
+
+/* Rest: transparent glass, outlined by a thin highlight */
+.btn,.btn-primary,.icon-btn,.more-btn,.socials a,.loader-enter .btn.btn-primary{
+  background:var(--glass-rest-sheen), var(--glass-rest); color:var(--ink)}
+.loader-enter .btn.btn-primary,.loader .btn{color:var(--on-forest)}
+/* Floating controls stay legible over photos and dark sections */
+.sound-dock,.a11y-fab{background:var(--glass-rest-sheen), var(--glass-float); color:var(--ink)}
+.band .btn,.band .more-btn,.band .socials a{color:var(--ink)}
+
+/* Hover and press: pistachio glass */
+.btn:hover,.icon-btn:hover,.more-btn:hover,.socials a:hover,.a11y-fab:hover,
+.btn:active,.icon-btn:active,.more-btn:active,.socials a:active,.a11y-fab:active{
+  background:var(--glass-sheen), var(--glass-hover); color:var(--glass-hover-fg); filter:none}
+.btn-primary:hover,.btn-primary:active,.loader-enter .btn.btn-primary:hover{background:var(--glass-sheen-soft), var(--glass-hover-strong); color:var(--glass-hover-fg)}
+.sound-btn:hover,.sound-btn:active{background:var(--glass-hover)}
+.band .sound-btn:hover,:root[data-theme="dark"] .sound-btn:hover{background:var(--glass-hover)}
+
+/* More transparent at rest */
+:root{
+  --glass-rest:rgba(255,255,255,.03);
+  --glass-rest-sheen:linear-gradient(180deg,rgba(255,255,255,.3) 0%,rgba(255,255,255,.04) 40%,rgba(255,255,255,0) 100%);
+  --glass-float:rgba(255,255,255,.24);
+  --glass-rest-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 6px 18px -12px rgba(6,34,22,.25);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --glass-rest:rgba(255,255,255,.01);
+  --glass-rest-sheen:linear-gradient(180deg,rgba(255,255,255,.08) 0%,rgba(255,255,255,.01) 40%,rgba(255,255,255,0) 100%);
+  --glass-float:rgba(255,255,255,.07);
+  --glass-rest-shadow:inset 0 1px 0 rgba(255,255,255,.16), 0 6px 18px -12px rgba(0,0,0,.5)}}
+:root[data-theme="dark"],.band,.loader{
+  --glass-rest:rgba(255,255,255,.01);
+  --glass-rest-sheen:linear-gradient(180deg,rgba(255,255,255,.08) 0%,rgba(255,255,255,.01) 40%,rgba(255,255,255,0) 100%);
+  --glass-float:rgba(255,255,255,.07);
+  --glass-rest-shadow:inset 0 1px 0 rgba(255,255,255,.16), 0 6px 18px -12px rgba(0,0,0,.5)}
+.btn,.btn-primary,.icon-btn,.more-btn,.socials a,.loader-enter .btn.btn-primary{box-shadow:var(--glass-rest-shadow)}
+.btn:hover,.icon-btn:hover,.more-btn:hover,.socials a:hover,.btn-primary:hover,
+.btn:active,.icon-btn:active,.more-btn:active,.socials a:active{box-shadow:var(--glass-inset), var(--glass-shadow-hover)}
+
+/* ========== Icon micro-animations, each tied to what the icon does ========== */
+svg .l1,svg .l2,svg .l3,#themeBtn .rays,#themeBtn .core,#themeBtn .moon,#themeBtn .star,.sound-btn .wave,.sound-btn .cone,.sound-btn .mute-x,#copyBtn .sheet-front,#copyBtn .sheet-back{transform-box:view-box}
+/* Menu: lines part on hover, fold into a close (X) when the menu is open */
+.menu-btn .l1{transform-origin:12px 7px} .menu-btn .l2{transform-origin:12px 12px} .menu-btn .l3{transform-origin:12px 17px}
+.menu-btn path{transition:transform .35s cubic-bezier(.2,.7,.2,1), opacity .2s}
+.menu-btn:hover .l1{transform:translateY(-1.6px)}
+.menu-btn:hover .l2{transform:scaleX(.82)}
+.menu-btn:hover .l3{transform:translateY(1.6px)}
+.menu-btn[aria-expanded="true"] .l1{transform:translateY(5px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] .l2{opacity:0; transform:scaleX(.2)}
+.menu-btn[aria-expanded="true"] .l3{transform:translateY(-5px) rotate(-45deg)}
+/* Theme: sun rays turn and the core glows; moon rocks and its stars twinkle in */
+#themeBtn .rays,#themeBtn .core,#themeBtn .moon{transform-origin:12px 12px; transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+#themeBtn:hover .rays{transform:rotate(90deg) scale(1.1)}
+#themeBtn:hover .core{transform:scale(.88)}
+#themeBtn:hover .moon{transform:rotate(-20deg)}
+#themeBtn .star{opacity:0; transform-origin:center; transform:scale(.4); transition:opacity .3s, transform .4s cubic-bezier(.2,.7,.2,1)}
+#themeBtn .s1{transform-origin:17px 4.5px} #themeBtn .s2{transform-origin:21px 9px; transition-delay:.08s}
+#themeBtn:hover .star{opacity:1; transform:scale(1)}
+/* Sound: waves ripple outward; when muted the X gives a little shake */
+.sound-btn .wave{transform-origin:11px 12px; transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.sound-btn:hover .wave{transform:scale(1.12)}
+.sound-btn:hover .wave2{transform:scale(1.22)}
+.sound-btn .cone{transform-origin:7px 12px; transition:transform .3s}
+.sound-btn:hover .cone{transform:scale(1.06)}
+.sound-btn:hover .mute-x{animation:muteShake .45s ease-in-out}
+@keyframes muteShake{25%{transform:translateX(-1px) rotate(-8deg)} 75%{transform:translateX(1px) rotate(8deg)}}
+.sound-btn .mute-x{transform-origin:18.5px 12px}
+/* Accessibility: the figure hops, ready to help */
+.a11y-fab svg{transition:transform .3s}
+.a11y-fab:hover svg{animation:hop .7s cubic-bezier(.3,.7,.3,1)}
+@keyframes hop{30%{transform:translateY(-3px) scale(1.06)} 55%{transform:translateY(0) scale(.97,1.03)} 75%{transform:translateY(-1px)}}
+/* Down arrows (See selected work, Read full quote): nudge down, pointing the way */
+a.btn svg,.more-btn svg{transition:transform .3s}
+a.btn:hover svg,.more-btn[aria-expanded="false"]:hover svg{animation:nudgeDown 1s ease-in-out infinite}
+@keyframes nudgeDown{50%{transform:translateY(3px)}}
+/* Social links: the arrow flies out to the top right and comes back in */
+.socials a svg{overflow:visible}
+.socials a:hover svg{animation:flyOut .55s cubic-bezier(.4,0,.2,1)}
+@keyframes flyOut{45%{transform:translate(7px,-7px); opacity:0} 46%{transform:translate(-7px,7px); opacity:0} 100%{transform:none; opacity:1}}
+/* Copy email: the front sheet lifts off the back one */
+#copyBtn .sheet-front,#copyBtn .sheet-back{transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+#copyBtn:hover .sheet-front{transform:translate(1.5px,1.5px)}
+#copyBtn:hover .sheet-back{transform:translate(-1px,-1px)}
+/* Enter with sound: sound waves ripple */
+#enterSound svg path:not(:first-child){transform-box:view-box; transform-origin:11px 12px; transition:transform .35s}
+#enterSound:hover svg path:nth-child(2){transform:scale(1.12)}
+#enterSound:hover svg path:nth-child(3){transform:scale(1.22)}
+@media (prefers-reduced-motion: reduce){
+  .menu-btn:hover path,#themeBtn:hover .rays,#themeBtn:hover .core,#themeBtn:hover .moon,.sound-btn:hover .wave,.sound-btn:hover .cone,#copyBtn:hover .sheet-front,#copyBtn:hover .sheet-back{transform:none}
+  #themeBtn:hover .star{transform:none}
+}
+
+/* Hero main call to action: always filled pistachio glass */
+.hero .btn-primary{background:var(--glass-sheen-soft), var(--glass-hover-strong); color:var(--glass-hover-fg); border-color:rgba(122,165,55,.45); box-shadow:var(--glass-inset), var(--glass-shadow)}
+.hero .btn-primary:hover,.hero .btn-primary:active{background:var(--glass-sheen-soft), linear-gradient(180deg,#E6F7B8 0%,#C8E77C 55%,#AFD85A 100%); color:#062216; box-shadow:var(--glass-inset), var(--glass-shadow-hover)}
+:root[data-theme="dark"] .hero .btn-primary:hover{background:var(--glass-sheen-soft), linear-gradient(180deg,rgba(221,243,170,.55),rgba(196,230,118,.4) 55%,rgba(176,218,92,.45)); color:#F1FADB}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .hero .btn-primary:hover{background:var(--glass-sheen-soft), linear-gradient(180deg,rgba(221,243,170,.55),rgba(196,230,118,.4) 55%,rgba(176,218,92,.45)); color:#F1FADB}}
+
+/* Header: Contact link replaced by the Get in touch button (kept in the phone menu, where the button is hidden) */
+@media (min-width:921px){.nav-contact{display:none}}
+.bar .hdr-cta{background:var(--glass-sheen-soft), var(--glass-hover-strong); color:var(--glass-hover-fg); border-color:rgba(122,165,55,.45); box-shadow:var(--glass-inset), var(--glass-shadow)}
+.bar .hdr-cta:hover,.bar .hdr-cta:active{background:var(--glass-sheen-soft), linear-gradient(180deg,#E6F7B8 0%,#C8E77C 55%,#AFD85A 100%); color:#062216; box-shadow:var(--glass-inset), var(--glass-shadow-hover)}
+:root[data-theme="dark"] .bar .hdr-cta:hover{background:var(--glass-sheen-soft), linear-gradient(180deg,rgba(221,243,170,.55),rgba(196,230,118,.4) 55%,rgba(176,218,92,.45)); color:#F1FADB}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bar .hdr-cta:hover{background:var(--glass-sheen-soft), linear-gradient(180deg,rgba(221,243,170,.55),rgba(196,230,118,.4) 55%,rgba(176,218,92,.45)); color:#F1FADB}}
+
+/* Hero badge: plain outline, not a button */
+.hero .eyebrow{background:transparent; border:1px solid var(--line-strong); box-shadow:none; -webkit-backdrop-filter:none; backdrop-filter:none}
+@media (prefers-reduced-transparency: reduce){
+  .btn,.btn-primary,.icon-btn,.more-btn,.socials a,.sound-dock,.a11y-fab{-webkit-backdrop-filter:none; backdrop-filter:none; background:var(--surface)}
+  .btn:hover,.icon-btn:hover,.more-btn:hover,.socials a:hover,.a11y-fab:hover,.btn-primary:hover{background:var(--lime); color:#062216}}
 </style>
 
 <div class="loader" id="loader" role="dialog" aria-modal="true" aria-labelledby="loaderTitle">
@@ -654,14 +893,14 @@ footer{padding-bottom:calc(16rem + env(safe-area-inset-bottom,0px)) !important}
 <header class="bar">
   <div class="wrap">
     <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="l1" d="M4 7h16"/><path class="l2" d="M4 12h16"/><path class="l3" d="M4 17h16"/></svg>
     </button>
     <a class="brand" href="#top" aria-label="Sanjay Pal, back to top"><svg class="logo" aria-hidden="true" focusable="false"><use href="#sp-logo"/></svg></a>
     <nav aria-label="Primary">
       <div class="nav" id="nav">
         <a href="#work">Work</a>
         <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <a href="#contact" class="nav-contact">Get in touch</a>
       </div>
     </nav>
     <a class="btn btn-primary hdr-cta" href="#contact">Get in touch</a>
@@ -914,7 +1153,7 @@ footer{padding-bottom:calc(16rem + env(safe-area-inset-bottom,0px)) !important}
       <div class="email-row">
         <a class="email" id="email" href="mailto:hello@sanjaypal.design" data-cms="t6c9b062">hello@sanjaypal.design</a>
         <button class="more-btn" id="copyBtn" type="button">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>Copy email
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect class="sheet-front" x="9" y="9" width="11" height="11" rx="2"/><path class="sheet-back" d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>Copy email
         </button>
       </div>
       <p class="copy-status" id="copyStatus" role="status" aria-live="polite"></p>
@@ -1004,7 +1243,7 @@ footer{padding-bottom:calc(16rem + env(safe-area-inset-bottom,0px)) !important}
 <div class="sound-dock" id="sound" role="group" aria-label="Background music">
   <div class="vol-wrap">
     <label class="sr-only" for="volRange">Music volume</label>
-    <input class="vol" type="range" id="volRange" min="0" max="100" step="1" value="2" aria-valuetext="2%" aria-orientation="vertical">
+    <input class="vol" type="range" id="volRange" min="0" max="100" step="1" value="4" aria-valuetext="4%" aria-orientation="vertical">
   </div>
   <button class="sound-btn" id="soundBtn" type="button" aria-label="Mute music">
     <svg id="soundIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"></svg>
@@ -1066,8 +1305,8 @@ window.__cmsReady=Promise.race([
   const tz=(Intl.DateTimeFormat().resolvedOptions().timeZone)||"your local time";
 
   /* ---------- Theme: auto by local time of day ---------- */
-  const sun='<circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>';
-  const moon='<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>';
+  const sun='<circle class="core" cx="12" cy="12" r="4.5"/><path class="rays" d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>';
+  const moon='<path class="moon" d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/><path class="star s1" d="M17 3v3M15.5 4.5h3"/><path class="star s2" d="M21 8v2M20 9h2"/>';
   function isDay(){const h=new Date().getHours(); return h>=6 && h<18}
   function applyTheme(){
     const pref=store.get("sp-theme")||"auto";
@@ -1585,7 +1824,7 @@ window.__cmsReady=Promise.race([
   let idx=options[Math.floor(Math.random()*options.length)];
   ls.set("sp-music-last",String(idx));
 
-  let vol=parseInt(ls.get("sp-music-v3"),10); if(!(vol>=0&&vol<=100)) vol=2;
+  let vol=parseInt(ls.get("sp-music-v4"),10); if(!(vol>=0&&vol<=100)) vol=4;
   let muted=ls.get("sp-music-muted")==="1";
   let started=false, wasPlaying=false, fadeRaf=0;
 
@@ -1594,8 +1833,8 @@ window.__cmsReady=Promise.race([
   const probe=new Audio(); probe.volume=.5; const volWorks=Math.abs(probe.volume-.5)<.01;
   if(!volWorks) document.documentElement.classList.add("vol-fixed");
 
-  const ON='<path d="M11 5L6 9H3v6h3l5 4z" fill="currentColor" stroke="none"/><path class="wave" d="M15.5 8.5a5 5 0 0 1 0 7"/><path class="wave wave2" d="M18.5 6a8.5 8.5 0 0 1 0 12"/>';
-  const OFF='<path d="M11 5L6 9H3v6h3l5 4z" fill="currentColor" stroke="none"/><path d="M16 9l5 6M21 9l-5 6"/>';
+  const ON='<path class="cone" d="M11 5L6 9H3v6h3l5 4z" fill="currentColor" stroke="none"/><path class="wave" d="M15.5 8.5a5 5 0 0 1 0 7"/><path class="wave wave2" d="M18.5 6a8.5 8.5 0 0 1 0 12"/>';
+  const OFF='<path class="cone" d="M11 5L6 9H3v6h3l5 4z" fill="currentColor" stroke="none"/><path class="mute-x" d="M16 9l5 6M21 9l-5 6"/>';
   function render(){
     const playing=started&&!muted&&vol>0;
     icon.innerHTML=(muted||vol===0)?OFF:ON;
@@ -1635,11 +1874,11 @@ window.__cmsReady=Promise.race([
   btn.addEventListener("click",()=>{
     if(!started&&!muted){play(true); return}
     muted=!muted; ls.set("sp-music-muted",muted?"1":"0");
-    if(muted){audio.pause()} else {if(vol===0){vol=2; ls.set("sp-music-v3","2")} removeStarters(); play(!started)}
+    if(muted){audio.pause()} else {if(vol===0){vol=4; ls.set("sp-music-v4","4")} removeStarters(); play(!started)}
     render();
   });
   sliders.forEach(r=>r&&r.addEventListener("input",()=>{
-    vol=parseInt(r.value,10)||0; ls.set("sp-music-v3",String(vol)); setVolume(vol/100,false);
+    vol=parseInt(r.value,10)||0; ls.set("sp-music-v4",String(vol)); setVolume(vol/100,false);
     if(vol>0&&!started&&!muted) play(false);
     render();
   }));
@@ -1651,7 +1890,7 @@ window.__cmsReady=Promise.race([
     audio,
     isPlaying:()=>started&&!audio.paused,
     isMuted:()=>muted,
-    start(){ if(muted){muted=false; ls.set("sp-music-muted","0")} if(vol===0){vol=2} removeStarters(); const r=play(true); render(); return r },
+    start(){ if(muted){muted=false; ls.set("sp-music-muted","0")} if(vol===0){vol=4} removeStarters(); const r=play(true); render(); return r },
     mute(){ muted=true; ls.set("sp-music-muted","1"); audio.pause(); removeStarters(); render() }
   };
   document.dispatchEvent(new Event("sp:music-ready"));
